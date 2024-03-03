@@ -2,13 +2,19 @@
 import { ref } from "vue";
 import { DateObj } from "../App.vue";
 
-const props = defineProps<{ date: DateObj }>();
-const localDate = ref(props.date)
+const props = defineProps<{ date: DateObj; isFormSubmitted: boolean }>();
+const localDate = ref(props.date);
 const weeks = ref<number>(52);
 const years = ref<number>(80);
 
 const todayDate = new Date();
-const birthdayDate = new Date(+localDate.value.year, +localDate.value.month - 1, +localDate.value.day);
+const birthdayDate = ref(
+  new Date(
+    +localDate.value.year,
+    +localDate.value.month - 1,
+    +localDate.value.day
+  )
+);
 
 function yearsBetweenDates(date1: Date, date2: Date) {
   const differenceInMilliseconds = Math.abs(date1.getTime() - date2.getTime());
@@ -17,7 +23,7 @@ function yearsBetweenDates(date1: Date, date2: Date) {
   );
   return years;
 }
-console.log(yearsBetweenDates(todayDate, birthdayDate));
+
 function weeksBetweenDates(date1: Date, date2: Date) {
   const differenceInMilliseconds = Math.abs(date1.getTime() - date2.getTime());
   const weeks = Math.floor(
@@ -26,21 +32,45 @@ function weeksBetweenDates(date1: Date, date2: Date) {
   return weeks;
 }
 
-const passedWeeks = ref(weeksBetweenDates(todayDate, birthdayDate));
+const passedWeeks = ref(weeksBetweenDates(todayDate, birthdayDate.value));
+
 const roundedWeeks = ref(
-  Math.floor((365 / 7 - 52) * yearsBetweenDates(todayDate, birthdayDate))
+  Math.floor((365 / 7 - 52) * yearsBetweenDates(todayDate, birthdayDate.value))
 );
 console.log("rounded weeks: ", roundedWeeks.value);
+const emit = defineEmits<{
+  (event: "setIsFormSubmitted", value: boolean): void;
+}>();
+
+const handleClick = () => {
+  emit("setIsFormSubmitted", false);
+};
 </script>
 
 <template>
   <div class="container">
     <h1>Calendar:</h1>
-    <h4>Birthday: {{ localDate.day }}/{{ localDate.month }}/{{ localDate.year }}</h4>
+    <h4>
+      Birthday: {{ localDate.day }}/{{ localDate.month }}/{{ localDate.year }}
+    </h4>
+    <button class="calendar-button button-6" @click="handleClick">
+      Try again!
+    </button>
 
     <div class="title__container">
+      <p class="horizontal">Weeks</p>
+      <p class="vertical">Years</p>
+      <div class="legend-container">
+        <div class="calendar__block passedSinceBirthday"></div>
+        <span class="legend-text">Weeks you've already lived</span>
+        <div class="calendar__block"></div>
+        <span class="legend-text">Weeks that haven't passed yet</span>
+        <p>If you live until 80 years old, you've already lived <strong class="percentage">{{ (passedWeeks / (80*52) * 100).toFixed(0) }}%</strong> of your expected life span</p>
+      </div>
       <p v-for="week in weeks" class="title title--week">{{ week }}</p>
-      <p v-for="year in years + 1" class="title title--year">{{ year - 1 }}</p>
+      <p v-for="year in years + 1" class="title title--year">
+        {{ year - 1 }}
+      </p>
     </div>
     <div class="calendar__container">
       <div v-for="(_, index) in (years + 1) * weeks">
@@ -57,6 +87,109 @@ console.log("rounded weeks: ", roundedWeeks.value);
 
 <style scoped>
 .container {
-  width: 350vw;
+  margin-bottom: 80px;
+}
+
+.calendar__container {
+  display: grid;
+  position: absolute;
+  top: 211px;
+  left: 40px;
+  width: fit-content;
+  height: fit-content;
+  grid-template-columns: repeat(52, 1fr);
+  grid-template-rows: repeat(80, 1fr);
+  gap: 2px;
+  margin: 30px;
+}
+
+.calendar__block {
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgb(133, 133, 133);
+  font-size: 0.5rem;
+  color: rgb(223, 221, 221);
+}
+
+.passedSinceBirthday {
+  background-color: rgb(255, 148, 148);
+}
+
+.beforeBirthday {
+  background-color: grey;
+}
+
+.title__container {
+  width: 400vw;
+}
+
+.title {
+  display: inline-block;
+  position: relative;
+  top: 45px;
+  left: 39px;
+  width: 8px;
+  font-size: 0.3rem;
+  margin: 1px;
+  text-align: center;
+}
+
+.title--year {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 47px;
+  left: 29px;
+  height: 9px;
+}
+
+.calendar-button {
+  position: absolute;
+  top: 15px;
+  left: 200px;
+  width: 100px;
+  font-size: 1rem;
+}
+
+.horizontal {
+  position: relative;
+  top: 139px;
+  left: 260px;
+  font-size: 1.8rem;
+}
+.horizontal::after {
+  content: " ----->";
+}
+
+.vertical {
+  position: absolute;
+  top: 450px;
+  left: 0px;
+  font-size: 1.8rem;
+  transform: rotate(-90deg);
+}
+
+.vertical::before {
+  content: "<----- ";
+}
+
+.legend-container {
+  width: 159px;
+  position: relative;
+  top: -10px;
+  left: 220px;
+  padding: 10px;
+  border: 1px solid rgba(136, 136, 136, 0.603);
+  border-radius: 5px;
+}
+
+.legend-text {
+  position: relative;
+  top: -9.5px;
+  left: 15px;
+}
+
+.percentage {
+  color: rgb(255, 148, 148);
 }
 </style>

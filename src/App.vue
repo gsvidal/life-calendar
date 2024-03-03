@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onUpdated, ref } from "vue";
 import BirthdayForm from "./components/BirthdayForm.vue";
 import Calendar from "./components/Calendar.vue";
 
@@ -10,23 +10,32 @@ export type DateObj = {
   month: string;
   year: string;
 };
+
 const date = ref<DateObj>({
-  day: "17",
-  month: "11",
-  year: "1995",
+  day: "24",
+  month: "1",
+  year: "1989",
 });
 </script>
 
 <template>
-  <div v-if="!isFormSubmitted">
-    <BirthdayForm
-      :date="date"
-      @setIsFormSubmitted="(value: boolean) => (isFormSubmitted = value)"
-      @setDate="(value: DateObj) => (date = {...value})"
-    />
-  </div>
-  <div v-else="">
-    <Calendar :date="date" />
+  <div class="app-container">
+    <div v-if="!isFormSubmitted">
+      <div class="bh-container"></div>
+      <BirthdayForm
+        :date="date"
+        @set-is-form-submitted="isFormSubmitted = $event"
+        @set-date="date = $event"
+      />
+      <div class="backdrop"></div>
+    </div>
+    <div v-else>
+      <Calendar
+        :date="date"
+        :isFormSubmitted="isFormSubmitted"
+        @set-is-form-submitted="isFormSubmitted = $event"
+      />
+    </div>
   </div>
 </template>
 
