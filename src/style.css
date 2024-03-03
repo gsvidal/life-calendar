@@ -5,7 +5,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  /* font-size: 62.5%; */
 }
 
 body {
@@ -54,11 +54,11 @@ body {
   background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 0.25rem;
-  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-shadow: rgba(255, 255, 255, 0.459) 0 1px 5px 0;
   box-sizing: border-box;
   color: rgba(0, 0, 0, 0.85);
   cursor: pointer;
-  display: inline-flex;
+  /* display: inline-flex; */
   font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
     Arial, sans-serif;
   font-size: 1.3rem;
@@ -75,7 +75,7 @@ body {
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: baseline;
-  width: 150px;
+  width: 190px;
 }
 
 .button-6:hover,
@@ -96,3 +96,9 @@ body {
   color: rgba(0, 0, 0, 0.65);
   transform: translateY(0);
 }
+
+strong {
+  display: inline;
+  color: rgb(255, 148, 148);
+}
+
