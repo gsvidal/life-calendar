@@ -38,7 +38,7 @@ const handleInput = (event: Event) => {
 
     <form @submit="handleSubmit">
       <div class="input__container">
-        <label for="day">Day</label>
+        <label for="day">Day :</label>
         <input
           id="day"
           type="number"
@@ -50,7 +50,7 @@ const handleInput = (event: Event) => {
         />
       </div>
       <div class="input__container">
-        <label for="month">Month</label>
+        <label for="month">Month :</label>
         <input
           id="month"
           type="number"
@@ -62,7 +62,7 @@ const handleInput = (event: Event) => {
         />
       </div>
       <div class="input__container">
-        <label for="year">Year</label>
+        <label for="year">Year :</label>
         <input
           id="year"
           type="number"
@@ -72,7 +72,7 @@ const handleInput = (event: Event) => {
         />
       </div>
       <button class="button-6" :class="{ disabled: !areInputsValidated() }">
-        Create your life Calendar
+        Create your <strong>life Calendar</strong>
       </button>
       <p v-if="!areInputsValidated()" class="error-msg">
         All fields must be filled
@@ -100,6 +100,7 @@ const handleInput = (event: Event) => {
   border-radius: 5px;
   backdrop-filter: blur(10px);
   background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
 }
 h1 {
   display: inline-block;
@@ -111,17 +112,19 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 20px 0;
 }
 .input__container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 180px;
   margin: 8px 0;
 }
 label {
   text-align: left;
   display: inline-block;
-  width: 60px;
+  width: 90px;
   font-size: 1.5rem;
 }
 input {
