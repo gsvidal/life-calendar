@@ -61,9 +61,9 @@ const handleClick = () => {
       <p class="horizontal">Weeks</p>
       <p class="vertical">Years</p>
       <div class="legend-container">
-        <div class="calendar__block passedSinceBirthday"></div>
+        <div class="calendar__block big passedSinceBirthday"></div>
         <span class="legend-text">Weeks you've already lived</span>
-        <div class="calendar__block"></div>
+        <div class="calendar__block big"></div>
         <span class="legend-text">Weeks that haven't passed yet</span>
         <p>If you live until 80 years old, you've already lived <strong class="percentage">{{ (passedWeeks / (80*52) * 100).toFixed(0) }}%</strong> of your expected life span</p>
       </div>
@@ -93,8 +93,8 @@ const handleClick = () => {
 .calendar__container {
   display: grid;
   position: absolute;
-  top: 211px;
-  left: 40px;
+  top: 323px;
+  left: 70px;
   width: fit-content;
   height: fit-content;
   grid-template-columns: repeat(52, 1fr);
@@ -109,6 +109,11 @@ const handleClick = () => {
   border: 1px solid rgb(133, 133, 133);
   font-size: 0.5rem;
   color: rgb(223, 221, 221);
+}
+
+.big {
+  width: 14px;
+  height: 14px;
 }
 
 .passedSinceBirthday {
@@ -127,7 +132,7 @@ const handleClick = () => {
   display: inline-block;
   position: relative;
   top: 45px;
-  left: 39px;
+  left: 69px;
   width: 8px;
   font-size: 0.3rem;
   margin: 1px;
@@ -138,22 +143,22 @@ const handleClick = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 47px;
-  left: 29px;
+  top: 44px;
+  left: 57px;
   height: 9px;
 }
 
 .calendar-button {
   position: absolute;
   top: 15px;
-  left: 200px;
-  width: 100px;
+  left: 270px;
+  width: 140px;
   font-size: 1rem;
 }
 
 .horizontal {
   position: relative;
-  top: 139px;
+  top: 200px;
   left: 260px;
   font-size: 1.8rem;
 }
@@ -163,8 +168,8 @@ const handleClick = () => {
 
 .vertical {
   position: absolute;
-  top: 450px;
-  left: 0px;
+  top: 600px;
+  left: -20px;
   font-size: 1.8rem;
   transform: rotate(-90deg);
 }
@@ -174,22 +179,19 @@ const handleClick = () => {
 }
 
 .legend-container {
-  width: 159px;
+  width: 290px;
   position: relative;
   top: -10px;
-  left: 220px;
-  padding: 10px;
+  left: 180px;
+  padding: 20px;
   border: 1px solid rgba(136, 136, 136, 0.603);
   border-radius: 5px;
 }
 
 .legend-text {
   position: relative;
-  top: -9.5px;
-  left: 15px;
+  top: -16px;
+  left: 25px;
 }
 
-.percentage {
-  color: rgb(255, 148, 148);
-}
 </style>
