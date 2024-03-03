@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onUpdated, ref } from "vue";
+import { ref } from "vue";
 import BirthdayForm from "./components/BirthdayForm.vue";
 import Calendar from "./components/Calendar.vue";
 
