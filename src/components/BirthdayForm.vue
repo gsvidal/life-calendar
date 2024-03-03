@@ -71,8 +71,12 @@ const handleInput = (event: Event) => {
           @input="handleInput"
         />
       </div>
-      <button class="button-6">Create your life Calendar</button>
-      <p v-if="!areInputsValidated()">All fields must be filled</p>
+      <button class="button-6" :class="{ disabled: !areInputsValidated() }">
+        Create your life Calendar
+      </button>
+      <p v-if="!areInputsValidated()" class="error-msg">
+        All fields must be filled
+      </p>
       <p v-else></p>
     </form>
   </div>
@@ -122,9 +126,22 @@ label {
 }
 input {
   width: 70px;
-  padding: 2px 8px;
+  padding: 2px 0px 2px 8px;
   border: 1px solid rgb(219, 219, 219);
   border-radius: 4px;
   font-size: 1.1rem;
+}
+.error-msg {
+  color: rgb(255, 148, 148);
+  margin-top: 10px;
+  font-size: 1.3rem;
+}
+button.disabled {
+  color: rgb(192, 192, 192);
+  background-color: grey;
+}
+button.disabled:hover {
+  transform: none;
+  cursor: initial;
 }
 </style>
