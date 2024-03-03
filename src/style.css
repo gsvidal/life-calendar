@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 62.5%;
+}
+
+body {
+  color: rgb(219, 219, 219);
+  background-color: rgb(44, 44, 44);
+}
+
 #app {
   margin: 30px;
 }
@@ -11,7 +20,7 @@
 .calendar__container {
   display: grid;
   position: absolute;
-  top: 83px;
+  top: 58px;
   left: 40px;
   width: fit-content;
   height: fit-content;
@@ -24,7 +33,7 @@
 .calendar__block {
   width: 8px;
   height: 8px;
-  border: 1px solid grey;
+  border: 1px solid rgb(133, 133, 133);
   font-size: 0.5rem;
   color: rgb(223, 221, 221);
 }
@@ -52,7 +61,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 9px;
+  top: 11px;
   left: 29px;
   height: 9px;
 }

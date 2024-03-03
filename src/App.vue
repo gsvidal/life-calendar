@@ -24,9 +24,6 @@ const date = ref<DateObj>({
       @setIsFormSubmitted="(value: boolean) => (isFormSubmitted = value)"
       @setDate="(value: DateObj) => (date = {...value})"
     />
-    <p>Date day: {{ date.day }}</p>
-    <p>Date month: {{ date.month }}</p>
-    <p>Date year: {{ date.year }}</p>
   </div>
   <div v-else="">
     <Calendar :date="date" />
