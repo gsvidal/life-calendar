@@ -8,4 +8,4 @@ This is a Life Calendar where a user can input their birthday and get a life cal
    <img src="https://i.postimg.cc/9QnvdsmP/life-calendar-preview.png" width="300" height="510" alt="Life Calendar">
 </a>
 
-Built with Vue JS.
+Built with Vue + TypeScript.
